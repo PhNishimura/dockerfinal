@@ -1,2 +1,34 @@
+# Dependencies
 node_modules/
+*/node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Database
+*.sqlite
+*.db
+
+# Environment variables
 .env
+.env.local
+.env.production
+
+# Logs
+*.log
+npm-debug.log*
+
+# Docker
+.dockerignore
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Package locks (keep them in version control)
+# package-lock.json

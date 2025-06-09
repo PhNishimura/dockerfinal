@@ -2,20 +2,35 @@ version: "3.8"
 
 services:
   backend:
-    image: concord-backend
+    build: ./backend
+    container_name: concord-backend
     ports:
       - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+    volumes:
+      - ./backend/database.sqlite:/app/database.sqlite
     networks:
-      - app-net
+      - concord-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   frontend:
-    image: concord-frontend
+    build: ./frontend
+    container_name: concord-frontend
     ports:
       - "8080:80"
+    depends_on:
+      - backend
     networks:
-      - app-net
+      - concord-network
+    environment:
+      - VITE_API_URL=http://localhost:3001
 
 networks:
-  app-net:
-    driver: overlay
-
+  concord-network:
+    driver: bridge
