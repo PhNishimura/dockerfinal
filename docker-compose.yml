@@ -2,7 +2,6 @@ version: "3.8"
 
 services:
   backend:
-    # Use the pre-built image instead of the build directive
     image: concord-backend
     container_name: concord-backend
     ports:
@@ -21,7 +20,6 @@ services:
       retries: 3
 
   frontend:
-    # Use the pre-built image instead of the build directive
     image: concord-frontend
     container_name: concord-frontend
     ports:
@@ -34,7 +32,6 @@ services:
       - VITE_API_URL=http://localhost:3001
 
 networks:
-  # Define the network as external and overlay
   concord-network:
     external: true
     driver: overlay
